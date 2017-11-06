@@ -112,5 +112,22 @@ def mat_plot_test():
     plt.show()
 
 
+def predict_date_person():
+    """
+    使用kNN算法，对约会对象进行预测，判断对方是否为自己喜欢的类型
+    :return: 打印判断结果
+    """
+    result_list = ['不喜欢', '一般', '还不错']
+    percentage_game = float(raw_input('percentage of time spent playing video game?'))
+    fly_miles = float(raw_input('frequent flier miles earned per year?'))
+    ice_cream = float(raw_input('liters of ice cream consumed per week'))
+    dating_data_mat, dating_labels = file2matrix('datingTestSet.txt')
+    norm_mat = auto_norm(dating_data_mat)
+    input_vector = np.array([fly_miles, percentage_game, ice_cream])
+    classifier_result = classify(input_vector, norm_mat, dating_labels, 3)
+    print '你对这个人的感觉是： %s' % result_list[classifier_result]
+
+
 if __name__ == '__main__':
-    dating_class_test()
+    # dating_class_test()
+    predict_date_person()
